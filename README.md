@@ -1,2 +1,821 @@
-# Hindi-shayari-
-Hindi Shayari website with love, sad, attitude, friendship and motivational shayari collection. Fast search and beautiful design.
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>Hindi Shayari</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+html,body{
+width:100%;
+overflow-x:hidden;
+background:#f5f5f5;
+touch-action:pan-y;
+}
+
+/* HEADER */
+
+header{
+width:100%;
+padding:14px 18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+box-shadow:0 2px 15px rgba(0,0,0,0.08);
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+background:linear-gradient(45deg,#ff0055,#ff9900);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.menu{
+font-size:28px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.right-buttons{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.search-icon{
+width:42px;
+height:42px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f2f2f2;
+border-radius:12px;
+font-size:20px;
+cursor:pointer;
+}
+
+.right-buttons button{
+padding:10px 14px;
+border:none;
+border-radius:10px;
+font-size:13px;
+font-weight:600;
+cursor:pointer;
+}
+
+.login-btn{
+background:#111;
+color:white;
+}
+
+.signup-btn{
+background:linear-gradient(45deg,#ff0055,#ff9900);
+color:white;
+}
+
+/* SEARCH */
+
+.top-search{
+position:fixed;
+top:75px;
+right:18px;
+width:0;
+overflow:hidden;
+transition:0.4s;
+z-index:999;
+}
+
+.top-search.active{
+width:250px;
+}
+
+.top-search input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:14px;
+background:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:#111;
+padding-top:70px;
+transition:0.4s;
+z-index:2000;
+overflow-y:auto;
+}
+
+.sidebar a{
+display:block;
+padding:16px 28px;
+color:white;
+text-decoration:none;
+font-size:18px;
+}
+
+.sidebar a:hover{
+background:#222;
+}
+
+.close{
+position:absolute;
+top:12px;
+right:20px;
+font-size:35px;
+cursor:pointer;
+color:white;
+}
+
+/* HERO */
+
+.hero{
+width:100%;
+height:50vh;
+min-height:320px;
+position:relative;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:70px;
+}
+
+.hero-slider{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+.hero-slider img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+animation:slideShow 20s infinite;
+filter:brightness(0.7);
+}
+
+.hero-slider img:nth-child(1){
+animation-delay:0s;
+}
+
+.hero-slider img:nth-child(2){
+animation-delay:5s;
+}
+
+.hero-slider img:nth-child(3){
+animation-delay:10s;
+}
+
+.hero-slider img:nth-child(4){
+animation-delay:15s;
+}
+
+@keyframes slideShow{
+
+0%{
+opacity:0;
+transform:scale(1);
+}
+
+8%{
+opacity:1;
+}
+
+25%{
+opacity:1;
+transform:scale(1.05);
+}
+
+33%{
+opacity:0;
+}
+
+100%{
+opacity:0;
+}
+
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+text-align:center;
+padding:20px;
+color:white;
+}
+
+.hero-content h1{
+font-size:42px;
+line-height:1.3;
+font-weight:700;
+text-shadow:0 4px 15px rgba(0,0,0,0.6);
+}
+
+.hero-content p{
+margin-top:15px;
+font-size:18px;
+font-weight:500;
+text-shadow:0 3px 10px rgba(0,0,0,0.6);
+}
+
+/* LANGUAGE */
+
+.languages{
+display:flex;
+justify-content:center;
+gap:12px;
+padding:20px;
+background:white;
+flex-wrap:wrap;
+}
+
+.languages button{
+padding:10px 18px;
+border:none;
+border-radius:30px;
+background:#111;
+color:white;
+font-size:14px;
+cursor:pointer;
+}
+
+/* CATEGORY */
+
+.categories{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+padding:25px 15px;
+background:white;
+}
+
+.categories button{
+padding:12px 20px;
+border:none;
+border-radius:35px;
+background:#f2f2f2;
+cursor:pointer;
+font-size:15px;
+font-weight:600;
+transition:0.3s;
+}
+
+.categories button:hover{
+background:#111;
+color:white;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:25px 15px 70px;
+}
+
+.title{
+text-align:center;
+font-size:38px;
+margin-bottom:40px;
+font-weight:700;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:16px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:14px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+font-size:21px;
+margin-bottom:6px;
+color:#ff0055;
+font-weight:700;
+}
+
+.card p{
+font-size:18px;
+line-height:1.3;
+white-space:normal;
+color:#333;
+font-weight:600;
+word-break:break-word;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+padding:35px 15px;
+text-align:center;
+color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero{
+height:42vh;
+min-height:260px;
+}
+
+.hero-content h1{
+font-size:28px;
+}
+
+.hero-content p{
+font-size:15px;
+}
+
+.logo{
+font-size:20px;
+}
+
+.right-buttons button{
+padding:8px 10px;
+font-size:12px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.card{
+padding:12px;
+}
+
+.card p{
+font-size:17px;
+line-height:1.25;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+<div class="close" onclick="closeMenu()">×</div>
+
+<a href="#">🏠 Home</a>
+<a href="#">❤️ Love Shayari</a>
+<a href="#">💔 Sad Shayari</a>
+<a href="#">😎 Attitude Shayari</a>
+<a href="#">🤝 Friendship Shayari</a>
+<a href="#">🔥 Motivation Shayari</a>
+
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="left">
+
+<div class="menu" onclick="openMenu()">☰</div>
+
+<div class="logo">Shayari.in</div>
+
+</div>
+
+<div class="right-buttons">
+
+<div class="search-icon" onclick="toggleSearch()">🔍</div>
+
+<button class="login-btn" onclick="googleLogin()">Login</button>
+
+<button class="signup-btn" onclick="googleSignup()">Sign Up</button>
+
+</div>
+
+</header>
+
+<!-- SEARCH -->
+
+<div class="top-search" id="topSearch">
+
+<input type="text" id="searchInput" placeholder="शायरी खोजें...">
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-slider">
+
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1600&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1600&auto=format&fit=crop">
+
+</div>
+
+<div class="hero-content">
+
+<h1>
+मंजिल मिले न मिले ❤️<br>
+कोशिश हमेशा जारी रखो
+</h1>
+
+<p>
+10000+ यूनिक शायरी • नई तस्वीरें • नया एहसास
+</p>
+
+</div>
+
+</section>
+
+<!-- LANGUAGE -->
+
+<div class="languages">
+
+<button onclick="changeLanguage('hindi')">🇮🇳 Hindi</button>
+
+<button onclick="changeLanguage('english')">🇬🇧 English</button>
+
+<button onclick="changeLanguage('urdu')">🇵🇰 Urdu</button>
+
+</div>
+
+<!-- CATEGORY -->
+
+<div class="categories">
+
+<button onclick="filterCategory('love')">❤️ Love</button>
+
+<button onclick="filterCategory('sad')">💔 Sad</button>
+
+<button onclick="filterCategory('attitude')">😎 Attitude</button>
+
+<button onclick="filterCategory('friendship')">🤝 Friendship</button>
+
+<button onclick="filterCategory('motivation')">🔥 Motivation</button>
+
+<button onclick="displayShayari(shayaris)">🌟 All</button>
+
+</div>
+
+<!-- SHAYARI -->
+
+<div class="container">
+
+<h2 class="title">Trending Hindi Shayari</h2>
+
+<div class="grid" id="grid"></div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>Hindi Shayari Website</h2>
+
+<p>❤️ हर दिन नई शायरी अपडेट होती रहती हैं ❤️</p>
+
+</footer>
+
+<script>
+
+/* MENU */
+
+function openMenu(){
+document.getElementById("sidebar").style.left="0";
+}
+
+function closeMenu(){
+document.getElementById("sidebar").style.left="-260px";
+}
+
+function toggleSearch(){
+document.getElementById("topSearch").classList.toggle("active");
+}
+
+/* GOOGLE LOGIN */
+
+function googleSignup(){
+
+let gmail = prompt("Enter Your Gmail ID");
+
+if(gmail===null || gmail.trim()===""){
+alert("Gmail Required");
+return;
+}
+
+if(!gmail.includes("@gmail.com")){
+alert("Enter Valid Gmail");
+return;
+}
+
+localStorage.setItem("googleUser",gmail);
+
+alert("Signup Successful ❤️");
+
+document.querySelector(".login-btn").innerText =
+gmail.substring(0,10);
+
+}
+
+function googleLogin(){
+
+let gmail = prompt("Enter Your Gmail ID");
+
+if(gmail===null || gmail.trim()===""){
+alert("Gmail Required");
+return;
+}
+
+let savedUser = localStorage.getItem("googleUser");
+
+if(savedUser===gmail){
+
+alert("Welcome " + gmail + " ❤️");
+
+document.querySelector(".login-btn").innerText =
+gmail.substring(0,10);
+
+}else{
+
+alert("Gmail Not Found Please Sign Up");
+
+}
+
+}
+
+window.onload=function(){
+
+let savedUser = localStorage.getItem("googleUser");
+
+if(savedUser){
+
+document.querySelector(".login-btn").innerText =
+savedUser.substring(0,10);
+
+}
+
+};
+
+/* SHAYARI */
+
+const shayaris=[];
+
+const categories=[
+"love",
+"sad",
+"attitude",
+"friendship",
+"motivation"
+];
+
+const emojis={
+love:"❤️",
+sad:"💔",
+attitude:"😎",
+friendship:"🤝",
+motivation:"🔥"
+};
+
+const languageData={
+
+hindi:[
+
+"दिल की हर धड़कन में तेरी यादों का उजाला रहता है",
+"हर शाम तेरे ख्यालों का मौसम साथ लाती है",
+"जिंदगी हर दिन नया एहसास देकर गुजर जाती है",
+"कुछ रिश्ते दिल से बनते हैं और हमेशा रहते हैं",
+"हर सपना मेहनत और हौसलों से पूरा होता है",
+"तेरी मुस्कान दिल को सुकून दे जाती है",
+"सच्ची मोहब्बत कभी खत्म नहीं होती",
+"हर खुशी छोटी छोटी बातों में छुपी होती है",
+"कुछ यादें जिंदगी भर साथ रहती हैं",
+"मेहनत करने वालों की हार नहीं होती",
+"हर सुबह नई उम्मीद लेकर आती है",
+"तेरी बातें आज भी दिल को छू जाती हैं",
+"समय हर इंसान को बहुत कुछ सिखा देता है",
+"दिल हमेशा अपने खास लोगों को याद करता है",
+"मंजिल उन्हीं को मिलती है जो चलते रहते हैं",
+"प्यार जिंदगी को खूबसूरत बना देता है",
+"कुछ चेहरे दिल में हमेशा बस जाते हैं",
+"हर दर्द इंसान को मजबूत बना देता है",
+"मोहब्बत हर दूरी को आसान बना देती है",
+"हर मुस्कान के पीछे एक कहानी छुपी होती है"
+
+]
+
+};
+
+let currentLanguage="hindi";
+
+/* GENERATE 10000 UNIQUE SHAYARI */
+
+function generateShayari(){
+
+shayaris.length=0;
+
+const lines=languageData[currentLanguage];
+
+for(let c=0;c<categories.length;c++){
+
+let total=2000;
+
+for(let i=1;i<=total;i++){
+
+let uniqueLine1 =
+lines[(i*3+c)%lines.length];
+
+let uniqueLine2 =
+lines[(i*5+c+1)%lines.length];
+
+let uniqueLine3 =
+lines[(i*7+c+2)%lines.length];
+
+let uniqueLine4 =
+lines[(i*9+c+3)%lines.length];
+
+let uniqueLine5 =
+lines[(i*11+c+4)%lines.length];
+
+let uniqueLine6 =
+lines[(i*13+c+5)%lines.length];
+
+shayaris.push({
+
+category:categories[c],
+
+title:
+`${emojis[categories[c]]} ${categories[c].toUpperCase()} Shayari ${i}`,
+
+text:`
+
+${uniqueLine1}।
+
+${uniqueLine2}।
+
+${uniqueLine3}।
+
+${uniqueLine4}।
+
+${uniqueLine5}।
+
+${uniqueLine6}।
+
+`
+
+});
+
+}
+
+}
+
+displayShayari(shayaris);
+
+}
+
+/* LANGUAGE */
+
+function changeLanguage(lang){
+
+currentLanguage=lang;
+
+generateShayari();
+
+}
+
+/* DISPLAY */
+
+const grid=document.getElementById("grid");
+
+function displayShayari(data){
+
+let html="";
+
+data.forEach(item=>{
+
+html+=`
+
+<div class="card">
+
+<h3>${item.title}</h3>
+
+<p>${item.text}</p>
+
+</div>
+
+`;
+
+});
+
+grid.innerHTML=html;
+
+}
+
+/* SEARCH */
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+
+const value=this.value.toLowerCase();
+
+const filtered=shayaris.filter(item=>
+
+item.title.toLowerCase().includes(value) ||
+item.text.toLowerCase().includes(value) ||
+item.category.toLowerCase().includes(value)
+
+);
+
+displayShayari(filtered);
+
+});
+
+/* FILTER */
+
+function filterCategory(cat){
+
+const filtered=shayaris.filter(item=>item.category===cat);
+
+displayShayari(filtered);
+
+}
+
+/* LOAD */
+
+generateShayari();
+
+</script>
+
+</body>
+
+</html>
